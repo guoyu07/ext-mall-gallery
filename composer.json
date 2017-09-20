@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Notadd\\Navigation\\": "src/"
+            "Notadd\\MallGallery\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Notadd\\Navigation\\Tests\\": "tests/"
+            "Notadd\\MallGallery\\Tests\\": "tests/"
         }
     },
     "require": {

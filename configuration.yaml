@@ -5,7 +5,7 @@ author:
     - Hollydan
     - 2642956839@qq.com
 version: 0.1.0
-provider: Notadd\Mall-gallery\Extension
+provider: Notadd\MallGallery\Extension
 assets:
     scripts:
         - assets/extensions/notadd/mall-gallery/js/extension.min.js
@@ -15,7 +15,7 @@ csrf:
     - 'api/mall-gallery*'
 events:
     subscribes:
-        - Notadd\Mall-gallery\Listeners\RouteRegister
+        - Notadd\MallGallery\Listeners\RouteRegister
 migrations:
     - databases/migrations
 publishes:

@@ -13,7 +13,8 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Picture;
 
 /**
- * Class AllCategoryHandler.
+ * Class AllPictureHandler
+ * @package Notadd\MallGallery\Handlers
  */
 class AllPictureHandler extends Handler
 {

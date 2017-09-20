@@ -20,6 +20,8 @@ class Gallery extends Model
         'cover',
         'order',
         'description',
+        'user_id',
+        'mall_id',
     ];
 
     /**

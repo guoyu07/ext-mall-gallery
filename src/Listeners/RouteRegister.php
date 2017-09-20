@@ -10,6 +10,7 @@
 namespace Notadd\MallGallery\Listeners;
 
 use Notadd\Foundation\Routing\Abstracts\RouteRegister as AbstractRouteRegister;
+use Notadd\MallGallery\Controllers\GalleryController;
 use Notadd\MallGallery\Controllers\PictureController;
 
 /**
@@ -22,10 +23,14 @@ class RouteRegister extends AbstractRouteRegister
      */
     public function handle()
     {
-            $this->router->group(['middleware' => ['cross', 'web'], 'prefix' => 'api/mall_gallery'], function () {
+        $this->router->group(['middleware' => ['cross', 'web'], 'prefix' => 'api/mall_gallery'], function () {
 
-                $this->router->group(['prefix' => 'picture'],function() {
+                $this->router->group(['prefix' => 'picture'], function() {
                     $this->router->post('list', PictureController::class.'@all');
+                });
+
+                $this->router->group(['prefix' => 'gallery'], function () {
+                    $this->router->post('list', GalleryController::class.'@all');
                 });
         });
     }

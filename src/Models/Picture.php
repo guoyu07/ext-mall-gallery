@@ -20,6 +20,8 @@ class Picture extends Model
         'size',
         'path',
         'description',
+        'user_id',
+        'gallery_id',
     ];
 
     /**

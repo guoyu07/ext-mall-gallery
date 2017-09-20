@@ -31,7 +31,7 @@ class AllGalleryHandler extends Handler
         ]);
 
         $perPage = $this->request->get('gallery_perpage');
-        $galleries = Gallery::OrderBy('created_at', 'desc')->paginate($perPage)->toArray();
+        $galleries = Gallery::with('mall')->withCount('pictures')->OrderBy('created_at', 'desc')->paginate($perPage)->toArray();
 
         return $this->withCode(200)->withData($galleries)->withMessage('获取数据成功！');
     }

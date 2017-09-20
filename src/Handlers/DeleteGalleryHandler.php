@@ -6,7 +6,7 @@
  * @copyright (c) 2017, notadd.com
  * @datetime: 17-9-20 上午11:43
  */
-namespace Notadd\Navigation\Handlers;
+namespace Notadd\MallGallery\Handlers;
 
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;

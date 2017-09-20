@@ -31,7 +31,31 @@ class AllGalleryHandler extends Handler
         ]);
 
         $perPage = $this->request->get('gallery_perpage');
-        $galleries = Gallery::with('mall')->withCount('pictures')->OrderBy('created_at', 'desc')->paginate($perPage)->toArray();
+        $order = $this->request->get('gallery_order', 3);
+        switch ($order) {
+            case 0:    //按从大到小
+                $orderBy = 'order';
+                $destination ='desc';
+                break;
+            case 1:     //按从小到大
+                $orderBy = 'order';
+                $destination ='asc';
+                break;
+            case 2:     //按创建时间从早到晚
+                $orderBy = 'created_at';
+                $destination = 'asc';
+                break;
+            case 3:     //按创建时间从晚到早
+                $orderBy = 'created_at';
+                $destination = 'desc';
+                break;
+            case 4:     //按相册名
+                $orderBy = 'name';
+                $destination = 'desc';
+                break;
+
+        }
+        $galleries = Gallery::with('mall')->withCount('pictures')->OrderBy($orderBy, $destination)->paginate($perPage);
 
         return $this->withCode(200)->withData($galleries)->withMessage('获取数据成功！');
     }

@@ -34,9 +34,9 @@ class ShowGalleryHandler extends Handler
 
         $galleryId = $this->request->get('gallery_id');
         $perPage = $this->request->get('gallery_perpage');
-        $gallery = Gallery::where('alias',$galleryId)->first();
+        $gallery = Gallery::find($galleryId);
         if ($gallery instanceof Gallery) {
-            $pictures = $gallery->pictures()->paginate($perPage)->toArray();
+            $pictures = $gallery->pictures()->paginate($perPage);
         } else {
             return $this->withCode(401)->withError('相册id不存在');
         }

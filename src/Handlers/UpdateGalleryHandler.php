@@ -7,7 +7,7 @@
  * @datetime: 17-9-20 下午2:32
  */
 
-namespace Notadd\Navigation\Handlers;
+namespace Notadd\MallGallery\Handlers;
 
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;

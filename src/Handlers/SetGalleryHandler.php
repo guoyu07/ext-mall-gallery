@@ -26,8 +26,10 @@ class SetGalleryHandler extends Handler
     public function execute()
     {
         $this->validate($this->request,[
+            'mall_id' => 'required',
             'gallery_name' => 'required',
         ],[
+            'mall_id.required' => '请传入店铺id',
             'gallery_name.required' => '请输入相册名称',
         ]);
 
@@ -36,6 +38,7 @@ class SetGalleryHandler extends Handler
         $gallery->user_id = 1;  //默认上传用户Id为1,管理员用户
         $gallery->order = $this->request->get('gallery_order');
         $gallery->description = $this->request->get('gallery_description');
+        $gallery->mall_id = $this->request->get('mall_id');
 
         if ($gallery->save()) {
             return $this->withCode(200)->withMessage('相册信息保存成功');

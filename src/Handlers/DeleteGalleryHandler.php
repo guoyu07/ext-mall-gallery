@@ -32,8 +32,8 @@ class DeleteGalleryHandler extends Handler
         ]);
 
         $galleryId = $this->request->input('gallery_id');
-        $gallery = Gallery::where('id', $galleryId)->first();
-        if (!$gallery) {
+        $gallery = Gallery::find($galleryId);
+        if (!$gallery instanceof Gallery) {
             return $this->withCode(401)->withError('请重新确认相册Id是否正确');
         }
 

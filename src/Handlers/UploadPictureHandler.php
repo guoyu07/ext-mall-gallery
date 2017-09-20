@@ -11,12 +11,12 @@ namespace Notadd\Slide\Handlers;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
 use Notadd\MallGallery\Models\Mall;
 use Notadd\MallGallery\Models\Picture;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class UploadHandler.
@@ -42,6 +42,7 @@ class UploadPictureHandler extends Handler
 
     public function execute()
     {
+
         //获得图集的文件地址
         $this->validate($this->request, [
             'gallery_id' => 'required',
@@ -57,13 +58,13 @@ class UploadPictureHandler extends Handler
         $gallery = Gallery::find($galleryId);
 
         if ($gallery) {
-            $galleryPath = $gallery->path;
+            $galleryPath = $gallery->id;
             $mallId = $gallery->mall_id;
         }
 
         $mall = Mall::find($mallId);
 
-        $mallPath = $mall->path;
+        $mallPath = $mall->id;
 
 
         $img = $this->request->file('file');
@@ -71,13 +72,13 @@ class UploadPictureHandler extends Handler
         $error = $img->getError();
         $hash = hash_file('md5', $img->getPathname(), false);
 
-        $dictionary = base_path('statics/uploads/' . $galleryPath);
+        $dictionary = base_path('statics/uploads/' . $mallPath . $galleryPath);
         $random = random_int(0, 9999999);
         $file = Str::substr($hash, 0, 32) . $random . '.' . $img->getClientOriginalExtension();
         if (!$this->files->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
             $img->move($dictionary, $file);
         }
-        $this->data['path'] = url('uploads/' . $mallPath . '/' . $hash . $random . '.' . $img->getClientOriginalExtension());
+        $this->data['path'] = url($dictionary . DIRECTORY_SEPARATOR . $file);
         $this->data['file_name'] = $realName;
         $this->data['error'] = $error;
         $picture = new Picture();
@@ -85,31 +86,9 @@ class UploadPictureHandler extends Handler
         $picture->user_id = 1;
         $picture->gallery_id = $gallery->id;
         $picture->name = $this->data['file_name'];
-        //$picture->size =
+        $picture->size = Image::make($picture->path)->width() . 'x' . Image::make($picture->path)->height();
         $picture->save();
 
         return true;
-    }
-
-    /**
-     * String split handler.
-     *
-     * @param string $path
-     * @param string $dots
-     * @param null $data
-     *
-     * @return \Illuminate\Support\Collection|null
-     */
-    protected function pathSplit($path, $dots, $data = null)
-    {
-        $dots = explode(',', $dots);
-        $data = $data ? $data : new Collection();
-        $offset = 0;
-        foreach ($dots as $dot) {
-            $data->push(Str::substr($path, $offset, $dot));
-            $offset += $dot;
-        }
-
-        return $data;
     }
 }

@@ -1,0 +1,22 @@
+name: 图片空间插件
+identification: notadd/ext-mall-gallery
+description: 图片空间管理插件
+author:
+    - Hollydan
+    - 2642956839@qq.com
+version: 0.1.0
+provider: Notadd\Mall-gallery\Extension
+assets:
+    scripts:
+        - assets/extensions/notadd/mall-gallery/js/extension.min.js
+    stylesheets:
+        - assets/extensions/notadd/mall-gallery/css/extension.min.css
+csrf:
+    - 'api/mall-gallery*'
+events:
+    subscribes:
+        - Notadd\Mall-gallery\Listeners\RouteRegister
+migrations:
+    - databases/migrations
+publishes:
+    assets/extensions/notadd/navigation: resources/mixes/administration/dist/assets/extensions/notadd/mall-gallery

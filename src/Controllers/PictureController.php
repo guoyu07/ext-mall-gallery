@@ -12,6 +12,7 @@ namespace Notadd\MallGallery\Controllers;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 use Notadd\MallGallery\Handlers\AllPictureHandler;
 use Notadd\MallGallery\Handlers\DeletePictureHandler;
+use Notadd\MallGallery\Handlers\DeletesPictureHandler;
 use Notadd\Slide\Handlers\UploadPictureHandler;
 
 class PictureController extends Controller
@@ -39,6 +40,15 @@ class PictureController extends Controller
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
     public function delete(DeletePictureHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * @param DeletesPictureHandler $handler
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function deletes(DeletesPictureHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

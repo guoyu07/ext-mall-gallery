@@ -31,13 +31,13 @@ class DeletePictureHandler extends Handler
             'picture_id.required' => '请传入图片id',
         ]);
 
-        $pictureId = $this->request->input('picture_id');
-        $pictureId = explode(',', $pictureId);
-        foreach ($pictureId as $id) {
-            $result = Picture::find($id)->delete();
+        $pictureId = $this->request->get('picture_id');
+        $picture = Picture::find($pictureId);
+        if (!$picture instanceof Picture) {
+            return $this->withCode(401)->withError('请重新确认图片id是否存在');
         }
 
-        if ($result) {
+        if ($picture->delete()) {
             return $this->withCode(200)->withMessage('删除图片成功');
         }
     }

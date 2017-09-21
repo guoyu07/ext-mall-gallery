@@ -13,6 +13,7 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 use Notadd\MallGallery\Handlers\AllPictureHandler;
 use Notadd\MallGallery\Handlers\DeletePictureHandler;
 use Notadd\MallGallery\Handlers\DeletesPictureHandler;
+use Notadd\MallGallery\Handlers\WatermarkPictureHandler;
 use Notadd\Slide\Handlers\UploadPictureHandler;
 
 class PictureController extends Controller
@@ -49,6 +50,15 @@ class PictureController extends Controller
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
     public function deletes(DeletesPictureHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * @param WatermarkPictureHandler $handler
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function mark(WatermarkPictureHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

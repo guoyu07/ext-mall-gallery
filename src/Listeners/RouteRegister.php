@@ -30,6 +30,7 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('set', PictureController::class.'@set');
                     $this->router->post('delete', PictureController::class.'@delete');
                     $this->router->post('deletes', PictureController::class.'@deletes');
+                    $this->router->post('mark', PictureController::class.'@mark');
                 });
 
                 $this->router->group(['prefix' => 'gallery'], function () {

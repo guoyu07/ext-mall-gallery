@@ -25,10 +25,16 @@ class DeletesPictureHandler extends Handler
 
         $ids = explode(',', $this->request->get('picture_id'));
         foreach ($ids as $id) {
-            $result = Picture::find($id)->delete();
-            if (!$result) {
+            $picture = Picture::find($id);
+            $subPath = strstr($picture->path, '/uploads');
+            $completePath = base_path('/public' . $subPath);
+            if (!$picture instanceof Picture) {
                 return $this->withCode(401)->withError('未找到id为' . $id . '的图片');
             }
+            if ($this->container->make('files')->exists($completePath)) {
+                $this->container->make('files')->delete($completePath);
+            }
+            $picture->delete();
         }
         return $this->withCode(200)->withMessage('删除图片信息成功');
     }

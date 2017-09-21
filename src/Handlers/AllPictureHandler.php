@@ -32,7 +32,7 @@ class AllPictureHandler extends Handler
         ]);
 
         $perPage = $this->request->get('picture_perpage');
-        $pictures = Picture::OrderBy('created_at', 'desc')->paginate($perPage)->toArray();
+        $pictures = Picture::OrderBy('created_at', 'desc')->paginate($perPage);
 
         return $this->withCode(200)->withData($pictures)->withMessage('获取数据成功！');
     }

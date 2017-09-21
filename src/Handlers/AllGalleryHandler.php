@@ -32,6 +32,10 @@ class AllGalleryHandler extends Handler
 
         $perPage = $this->request->get('gallery_perpage');
         $order = $this->request->get('gallery_order', 3);
+        $key = $this->request->get('gallery_key');
+        $value = $this->request->get('gallery_value');
+
+        //排序
         switch ($order) {
             case 0:    //按从大到小
                 $orderBy = 'order';
@@ -55,7 +59,26 @@ class AllGalleryHandler extends Handler
                 break;
 
         }
-        $galleries = Gallery::with('mall')->withCount('pictures')->OrderBy($orderBy, $destination)->paginate($perPage);
+
+        //搜索
+        switch ($key) {
+            case 0:     //相册id
+                $where = ['id' => $value];
+                break;
+            case 1:     //相册名称
+                $where = ['name' => $value];
+                break;
+            case 2:     //店铺id
+                $where = ['mall_id' => $value];
+                break;
+            case 3:     //店铺名称
+                $where = ['mall_name' => $value];
+                break;
+            default:    //没有搜索条件
+                $where = [];
+        }
+
+        $galleries = Gallery::with('mall')->withCount('pictures')->where($where)->OrderBy($orderBy, $destination)->paginate($perPage);
 
         return $this->withCode(200)->withData($galleries)->withMessage('获取数据成功！');
     }

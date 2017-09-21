@@ -23,6 +23,8 @@ class RouteRegister extends AbstractRouteRegister
      */
     public function handle()
     {
+        $this->router->get('test', \GallerySeeder::class.'@run');
+
         $this->router->group(['middleware' => ['cross', 'web'], 'prefix' => 'api/mall_gallery'], function () {
 
                 $this->router->group(['prefix' => 'picture'], function() {

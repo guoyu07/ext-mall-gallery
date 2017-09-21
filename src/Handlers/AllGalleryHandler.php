@@ -11,6 +11,7 @@ namespace Notadd\MallGallery\Handlers;
 
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
+use Notadd\MallGallery\Models\Mall;
 
 /**
  * Class AllCategoryHandler.
@@ -37,7 +38,7 @@ class AllGalleryHandler extends Handler
 
         //排序
         switch ($order) {
-            case 0:    //按从大到小
+            case 5:    //按从大到小
                 $orderBy = 'order';
                 $destination ='desc';
                 break;
@@ -61,21 +62,24 @@ class AllGalleryHandler extends Handler
         }
 
         //搜索
-        switch ($key) {
-            case 0:     //相册id
-                $where = ['id' => $value];
-                break;
-            case 1:     //相册名称
-                $where = ['name' => $value];
-                break;
-            case 2:     //店铺id
-                $where = ['mall_id' => $value];
-                break;
-            case 3:     //店铺名称
-                $where = ['mall_name' => $value];
-                break;
-            default:    //没有搜索条件
-                $where = [];
+        if ($key && $value) {
+            switch ($key) {
+                case 4:     //相册id
+                    $where = ['id' => $value];
+                    break;
+                case 1:     //相册名称
+                    $where = ['name' => $value];
+                    break;
+                case 2:     //店铺id
+                    $where = ['mall_id' => $value];
+                    break;
+                case 3:     //店铺名称
+                    $mall = Mall::where('name', $value)->first();
+                    $where = ['mall_id' => $mall->id];
+                    break;
+            }
+        } else {
+            $where = [];
         }
 
         $galleries = Gallery::with('mall')->withCount('pictures')->where($where)->OrderBy($orderBy, $destination)->paginate($perPage);

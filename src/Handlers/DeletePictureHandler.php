@@ -33,8 +33,16 @@ class DeletePictureHandler extends Handler
 
         $pictureId = $this->request->get('picture_id');
         $picture = Picture::find($pictureId);
+
+        $subPath = strstr($picture->path, '/uploads');
+        $completePath = base_path('/public' . $subPath);
+
         if (!$picture instanceof Picture) {
             return $this->withCode(401)->withError('请重新确认图片id是否存在');
+        }
+
+        if ($this->container->make('files')->exists($completePath)) {
+            $this->container->make('files')->delete($completePath);
         }
 
         if ($picture->delete()) {

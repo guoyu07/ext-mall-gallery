@@ -25,13 +25,7 @@ class AllGalleryHandler extends Handler
      */
     protected function execute()
     {
-        $this->validate($this->request,[
-            'gallery_perpage' => 'required',
-        ],[
-            'gallery_perpage.required' => '请输入每页显示条数',
-        ]);
-
-        $perPage = $this->request->get('gallery_perpage');
+        $perPage = $this->request->get('gallery_perpage', 20);
         $order = $this->request->get('gallery_order', 3);
         $key = $this->request->get('gallery_key');
         $value = $this->request->get('gallery_value');

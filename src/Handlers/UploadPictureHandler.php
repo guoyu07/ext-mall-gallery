@@ -7,7 +7,7 @@
  * @datetime: 17-9-20 下午2:44
  */
 
-namespace Notadd\Slide\Handlers;
+namespace Notadd\MallGallery\Handlers;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;

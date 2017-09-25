@@ -13,8 +13,8 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 use Notadd\MallGallery\Handlers\AllPictureHandler;
 use Notadd\MallGallery\Handlers\DeletePictureHandler;
 use Notadd\MallGallery\Handlers\DeletesPictureHandler;
+use Notadd\MallGallery\Handlers\UploadPictureHandler;
 use Notadd\MallGallery\Handlers\WatermarkPictureHandler;
-use Notadd\Slide\Handlers\UploadPictureHandler;
 
 class PictureController extends Controller
 {

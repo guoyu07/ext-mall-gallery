@@ -57,6 +57,8 @@ class UploadPictureHandler extends Handler
         if ($gallery) {
             $galleryPath = $gallery->id;
             $mallId = $gallery->mall_id;
+        } else {
+            return $this->withCode(401)->withError('相册id不存在');
         }
 
         $mall = Mall::find($mallId);

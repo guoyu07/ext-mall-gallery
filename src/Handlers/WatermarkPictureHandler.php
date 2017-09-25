@@ -26,13 +26,13 @@ class WatermarkPictureHandler extends Handler
 
         $ids = explode(',', $this->request->get('picture_id'));
         $position = $this->request->get('position', 'bottom-right');    //  添加水印位置
-        $waterMark = Image::make('watermark.jpg');    //  水印图片
+        $waterMark = Image::make('/var/www/notadd/extensions/notadd/ext-mall-gallery/resources/images/beer.jpg');    //  水印图片
         foreach ($ids as $id) {
             $picture = Picture::find($id);
-            $result = Image::make($picture->path)->insert($waterMark, $position);
             if (!$picture instanceof Picture) {
                 return $this->withCode(401)->withError('未找到id为' . $id . '的图片');
             }
+            $result = Image::make($picture->path)->insert($waterMark, $position);
             if (!$result) {
                 return $this->withCode(402)->withError('添加水印失败');
             }

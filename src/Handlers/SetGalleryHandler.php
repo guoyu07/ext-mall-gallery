@@ -36,7 +36,7 @@ class SetGalleryHandler extends Handler
         $gallery = new Gallery();
         $gallery->name = $this->request->get('gallery_name');
         $gallery->user_id = 1;  //默认上传用户Id为1,管理员用户
-        $gallery->order = $this->request->get('gallery_order');
+        $gallery->order = $this->request->get('gallery_order', 0);
         $gallery->description = $this->request->get('gallery_description');
         $gallery->mall_id = $this->request->get('mall_id');
 

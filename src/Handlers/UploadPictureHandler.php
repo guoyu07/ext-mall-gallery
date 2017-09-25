@@ -66,7 +66,6 @@ class UploadPictureHandler extends Handler
 
         $img = $this->request->file('file');
         $realName = $img->getClientOriginalName();  //  文件原名
-        $error = $img->getError();
         $hash = hash_file('md5', $img->getPathname(), false);   //  加密文件
 
         $dictionary = base_path('statics/uploads/' . $mallPath . $galleryPath);     //  文件路径
@@ -75,7 +74,7 @@ class UploadPictureHandler extends Handler
         if (!$this->files->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
             $img->move($dictionary, $file);
         }
-        $path = url($dictionary . DIRECTORY_SEPARATOR . $file);     //  图片链接
+        $path = '/statics/uploads/' . $file;     //  图片链接
 
         //将图片存到数据库
         $picture = new Picture();

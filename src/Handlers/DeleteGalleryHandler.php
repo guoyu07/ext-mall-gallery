@@ -8,14 +8,26 @@
  */
 namespace Notadd\MallGallery\Handlers;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
+use PHPUnit\Util\Filesystem;
 
 /**
  * Class DeleteCategoryHandler.
  */
 class DeleteGalleryHandler extends Handler
 {
+
+    protected $filesystem;
+
+    public function __construct(Container $container, Filesystem $filesystem)
+    {
+        parent::__construct($container);
+        $this->filesystem = $filesystem;
+    }
+
     /**
      * Execute Handler.
      *
@@ -35,6 +47,13 @@ class DeleteGalleryHandler extends Handler
         $gallery = Gallery::find($galleryId);
         if (!$gallery instanceof Gallery) {
             return $this->withCode(401)->withError('请重新确认相册Id是否正确');
+        }
+
+        //删除相册文件夹
+        $picture = $gallery->pictures()->first();
+        $imgDictionary = base_path(Str::substr($picture->path, 0, strrpos($picture->path, '/')));
+        if ($this->filesystem->exist($imgDictionary)) {
+            Storage::deleteDirector($imgDictionary);
         }
 
         if ($gallery->delete()) {

@@ -68,13 +68,13 @@ class UploadPictureHandler extends Handler
         $realName = $img->getClientOriginalName();  //  文件原名
         $hash = hash_file('md5', $img->getPathname(), false);   //  加密文件
 
-        $dictionary = base_path('statics/uploads/' . $mallPath . $galleryPath);     //  文件路径
+        $dictionary = base_path('statics/uploads/' . $mallPath . DIRECTORY_SEPARATOR . $galleryPath);     //  文件路径
         $random = random_int(0, 9999999);
         $file = Str::substr($hash, 0, 32) . $random . '.' . $img->getClientOriginalExtension();     //  上传之后文件名
         if (!$this->files->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
             $img->move($dictionary, $file);
         }
-        $path = '/statics/uploads/' . $file;     //  图片链接
+        $path = 'statics/uploads/' . $mallPath . '/' . $galleryPath . '/' . $file;     //  图片链接
 
         //将图片存到数据库
         $picture = new Picture();

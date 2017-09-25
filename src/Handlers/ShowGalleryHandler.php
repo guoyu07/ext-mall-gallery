@@ -26,14 +26,12 @@ class ShowGalleryHandler extends Handler
     {
         $this->validate($this->request,[
             'gallery_id' => 'required',
-            'gallery_perpage' => 'required',
         ],[
             'gallery_id.required' => '请传入相册id',
-            'gallery_perpage.required' => '请传入每页显示条数',
         ]);
 
         $galleryId = $this->request->get('gallery_id');
-        $perPage = $this->request->get('gallery_perpage');
+        $perPage = $this->request->get('gallery_perpage', 20);
         $gallery = Gallery::find($galleryId);
         if ($gallery instanceof Gallery) {
             $pictures = $gallery->pictures()->paginate($perPage);

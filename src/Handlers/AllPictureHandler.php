@@ -25,12 +25,6 @@ class AllPictureHandler extends Handler
      */
     protected function execute()
     {
-        $this->validate($this->request,[
-            'picture_perpage' => 'required',
-        ],[
-            'picture_perpage.required' => '请输入每页显示条数',
-        ]);
-
         //图片排序
         $order = $this->request->get('picture_order', 1);
         switch ($order) {
@@ -56,7 +50,7 @@ class AllPictureHandler extends Handler
                 break;
         }
 
-        $perPage = $this->request->get('picture_perpage');
+        $perPage = $this->request->get('picture_perpage', 20);
         $pictures = Picture::OrderBy($order, $destination)->paginate($perPage);
 
         return $this->withCode(200)->withData($pictures)->withMessage('获取数据成功！');

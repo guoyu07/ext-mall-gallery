@@ -1,23 +1,23 @@
-import ProductPicture from '../pages/ProductPicture.vue';
-import ProductPictureLook from '../pages/ProductPictureLook.vue';
-import ProductPictureLookAll from '../pages/ProductPictureLookAll.vue';
+import PictureManager from '../pages/PictureManager.vue';
+import PictureLook from '../pages/PictureLook.vue';
+import PictureLookAll from '../pages/PictureLookAll.vue';
 
 export default function (injection) {
     injection.useExtensionRoute([
         {
             beforeEnter: injection.middleware.requireAuth,
-            component: ProductPicture,
+            component: PictureManager,
             path: 'mall-gallery',
         },
         {
             beforeEnter: injection.middleware.requireAuth,
-            component: ProductPictureLook,
-            path: 'product/picture/look',
+            component: PictureLook,
+            path: 'picture/look',
         },
         {
             beforeEnter: injection.middleware.requireAuth,
-            component: ProductPictureLookAll,
-            path: 'product/picture/look/all',
+            component: PictureLookAll,
+            path: 'picture/look/all',
         },
     ]);
 }

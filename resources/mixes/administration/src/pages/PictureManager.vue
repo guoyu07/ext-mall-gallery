@@ -158,7 +158,10 @@
         },
         methods: {
             changePage() {},
-            refreshData() {},
+            refreshData() {
+                const self = this;
+                self.filterWord = '';
+            },
             remove(index) {
                 this.list.splice(index, 1);
             },

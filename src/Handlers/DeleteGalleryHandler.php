@@ -12,21 +12,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
-use PHPUnit\Util\Filesystem;
 
 /**
  * Class DeleteCategoryHandler.
  */
 class DeleteGalleryHandler extends Handler
 {
-
-    protected $filesystem;
-
-    public function __construct(Container $container, Filesystem $filesystem)
-    {
-        parent::__construct($container);
-        $this->filesystem = $filesystem;
-    }
 
     /**
      * Execute Handler.
@@ -51,10 +42,21 @@ class DeleteGalleryHandler extends Handler
 
         //删除相册文件夹
         $picture = $gallery->pictures()->first();
-        $imgDictionary = base_path(Str::substr($picture->path, 0, strrpos($picture->path, '/')));
-        if ($this->filesystem->exist($imgDictionary)) {
-            Storage::deleteDirector($imgDictionary);
+        if ($picture) {
+            $subPath = strstr($picture->path, '/uploads');
+            $completePath = base_path('statics' . $subPath);
+            $imgDictionary = Str::substr($completePath, 0, strrpos($completePath, '/'));
+
+            if (file_exists($imgDictionary)) {
+                Storage::deleteDirectory($imgDictionary);
+                return $this->withData(Storage::deleteDirectory($imgDictionary));
+            }
+            /*if ($this->container->make('files')->exists($imgDictionary)) {
+                $this->container->make('files')->delete($imgDictionary);
+                return $this->withData($this->container->make('files')->delete($imgDictionary));
+            }*/
         }
+
 
         if ($gallery->delete()) {
             return $this->withCode(200)->withMessage('删除相册成功');

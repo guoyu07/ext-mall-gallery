@@ -12,11 +12,11 @@ namespace Notadd\MallGallery\Handlers;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
 use Notadd\MallGallery\Models\Mall;
 use Notadd\MallGallery\Models\Picture;
-use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class UploadHandler.
@@ -74,15 +74,15 @@ class UploadPictureHandler extends Handler
         if (!$this->files->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
             $img->move($dictionary, $file);
         }
-        $path = 'statics/uploads/' . $mallPath . '/' . $galleryPath . '/' . $file;     //  图片链接
+        $path = url('uploads/' . $mallPath . '/' . $galleryPath . '/' . $file);     //  图片链接
 
         //将图片存到数据库
         $picture = new Picture();
+        $picture->size = Image::make($dictionary . '/' . $file)->width() . 'x' . Image::make($dictionary . '/' . $file)->height();
         $picture->path = $path;
         $picture->user_id = 1;
         $picture->gallery_id = $gallery->id;
         $picture->name = $realName;
-        $picture->size = Image::make($path)->width() . 'x' . Image::make($path)->height();
         $picture->save();
 
         return true;

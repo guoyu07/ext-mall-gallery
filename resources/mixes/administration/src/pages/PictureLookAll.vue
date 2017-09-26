@@ -132,10 +132,11 @@
                     <i-button type="text" @click.native="removeImage">
                         <icon type="trash-a"></icon>
                     </i-button>
-                    <checkbox v-model="item.single" @on-change="checkAllGroupChange()"></checkbox>
-                    <p class="name">{{ item.name}}</p>
-                    <p class="tip">{{ item.uploadTime}}</p>
-                    <p class="tip">{{ item.size}}</p>
+                    <checkbox v-model="item.single"
+                              @on-change="checkAllGroupChange"></checkbox>
+                    <p class="name">{{ item.name }}</p>
+                    <p class="tip">{{ item.uploadTime }}</p>
+                    <p class="tip">{{ item.size }}</p>
                 </div>
                 <div class="page">
                     <page :current="page.current_page"

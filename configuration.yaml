@@ -12,7 +12,7 @@ assets:
     stylesheets:
         - assets/extensions/notadd/mall-gallery/css/extension.min.css
 csrf:
-    - 'api/mall-gallery*'
+    - 'api/mall_gallery*'
 events:
     subscribes:
         - Notadd\MallGallery\Listeners\RouteRegister

@@ -115,7 +115,8 @@
                             :indeterminate="indeterminate"
                             v-model="checkAll"
                             @on-change="handleCheckAll">全选</checkbox>
-                    <i-button class="delete-btn" type="ghost" @click.native="delete">删除</i-button>
+                    <i-button class="delete-btn" type="ghost"
+                              @click.native="delete">删除</i-button>
                 </div>
                 <div v-for="(item, index) in pictureList" class="picture-check">
                     <img :src="item.img" alt="" @click="lookPicture(item)">

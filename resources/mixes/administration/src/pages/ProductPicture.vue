@@ -11,7 +11,8 @@
         data() {
             const self = this;
             return {
-                managementSearch: '',
+                managementSearch: '1',
+                filterValue: '',
                 searchList: [
                     {
                         label: '相册名称',
@@ -94,7 +95,9 @@
                                 h('i-button', {
                                     on: {
                                         click() {
-                                            self.look(data.index);
+                                            self.$router.push({
+                                                path: 'picture/look',
+                                            });
                                         },
                                     },
                                     props: {
@@ -149,18 +152,7 @@
             };
         },
         methods: {
-            lookData() {
-                const self = this;
-                self.$router.push({
-                    path: 'picture/look/all',
-                });
-            },
-            look() {
-                const self = this;
-                self.$router.push({
-                    path: 'picture/look',
-                });
-            },
+            refreshData() {},
             remove(index) {
                 this.list.splice(index, 1);
             },
@@ -178,10 +170,12 @@
                             <p>相册删除后，相册内全部图片都会删除，不能恢复，请谨慎操作</p>
                         </div>
                         <div class="album-action">
-                            <i-button class="add-data" type="ghost" @click.native="lookData">全部图片</i-button>
-                            <i-button size="small" type="text" icon="android-sync" class="refresh">刷新</i-button>
+                            <router-link class="add-data" type="ghost"
+                                         to="/picture/look/all">全部图片</router-link>
+                            <i-button size="small" type="text" icon="android-sync"
+                                      class="refresh" @click.native="refreshData">刷新</i-button>
                             <div class="goods-body-header-right">
-                                <i-input v-model="managementWord" placeholder="请输入关键词进行搜索">
+                                <i-input v-model="filterValue" placeholder="请输入关键词进行搜索">
                                     <i-select v-model="managementSearch" slot="prepend" style="width: 100px;">
                                         <i-option v-for="item in searchList"
                                                   :value="item.value">{{ item.label }}</i-option>

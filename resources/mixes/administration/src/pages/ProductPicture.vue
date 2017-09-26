@@ -11,8 +11,7 @@
         data() {
             const self = this;
             return {
-                managementSearch: '1',
-                filterValue: '',
+                filterWord: '',
                 searchList: [
                     {
                         label: '相册名称',
@@ -31,6 +30,7 @@
                         value: '4',
                     },
                 ],
+                searchValue: '1',
                 columns: [
                     {
                         key: 'albumId',
@@ -175,8 +175,8 @@
                             <i-button size="small" type="text" icon="android-sync"
                                       class="refresh" @click.native="refreshData">刷新</i-button>
                             <div class="goods-body-header-right">
-                                <i-input v-model="filterValue" placeholder="请输入关键词进行搜索">
-                                    <i-select v-model="managementSearch" slot="prepend" style="width: 100px;">
+                                <i-input v-model="filterWord" placeholder="请输入关键词进行搜索">
+                                    <i-select v-model="searchValue" slot="prepend" style="width: 100px;">
                                         <i-option v-for="item in searchList"
                                                   :value="item.value">{{ item.label }}</i-option>
                                     </i-select>
@@ -184,7 +184,9 @@
                                 </i-input>
                             </div>
                         </div>
-                        <i-table highlight-row :columns="columns" :context="self"
+                        <i-table highlight-row
+                                 :columns="columns"
+                                 :context="self"
                                  :data="list"></i-table>
                     </card>
                 </tab-pane>

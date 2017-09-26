@@ -1,7 +1,7 @@
 .setting-wrap {
     .goods-picture {
         .ivu-tabs-nav-scroll {
-            background: #ffffff;
+            background: #fff;
             padding-left: 20px;
         }
         .prompt-box {
@@ -35,18 +35,15 @@
         }
         .ivu-table-wrapper {
             border: 0 none;
+            border-top: 1px solid #e9eaec !important;
             .ivu-table:after{
                 background-color: inherit;
             }
+            .ivu-table:before {
+                background-color: #e9eaec;
+            }
         }
         .ivu-table {
-            .ivu-table-fixed-body {
-                overflow: inherit;
-            }
-            .ivu-table-fixed-right:before,
-            .ivu-table-fixed:before {
-                height: 0;
-            }
             .ivu-btn-small {
                 padding: 3px 19px;
                 border-radius: 4px;
@@ -58,6 +55,16 @@
                 .ivu-icon {
                     color: #39f;
                 }
+            }
+        }
+    }
+    .page {
+        margin-top: 20px;
+        margin-bottom: 50px;
+        text-align: center;
+        .ivu-page-options-elevator {
+            input {
+                text-align: center;
             }
         }
     }

@@ -8,7 +8,6 @@
  */
 namespace Notadd\MallGallery\Handlers;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
@@ -47,14 +46,18 @@ class DeleteGalleryHandler extends Handler
             $completePath = base_path('statics' . $subPath);
             $imgDictionary = Str::substr($completePath, 0, strrpos($completePath, '/'));
 
-            if (file_exists($imgDictionary)) {
-                Storage::deleteDirectory($imgDictionary);
-                return $this->withData(Storage::deleteDirectory($imgDictionary));
+            //先删除文件夹下面的图片
+            foreach ($gallery->pictures as $pic) {
+                $path = base_path('statics' . strstr($pic->path, '/uploads'));
+                if ($this->container->make('files')->exists($path)) {
+                    $this->container->make('files')->delete($path);
+                }
             }
-            /*if ($this->container->make('files')->exists($imgDictionary)) {
-                $this->container->make('files')->delete($imgDictionary);
-                return $this->withData($this->container->make('files')->delete($imgDictionary));
-            }*/
+
+            //再删除空文件夹
+            if ($this->container->make('files')->exists($imgDictionary)) {
+                rmdir($imgDictionary);
+            }
         }
 
 

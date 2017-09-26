@@ -39,9 +39,7 @@ class DeletePictureHandler extends Handler
         }
 
         $subPath = strstr($picture->path, '/uploads');
-
         $completePath = base_path('statics' . $subPath);
-
         if ($this->container->make('files')->exists($completePath)) {
             $this->container->make('files')->delete($completePath);
         }

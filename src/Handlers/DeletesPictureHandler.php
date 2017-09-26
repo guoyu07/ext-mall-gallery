@@ -29,13 +29,14 @@ class DeletesPictureHandler extends Handler
             if (!$picture instanceof Picture) {
                 return $this->withCode(401)->withError('未找到id为' . $id . '的图片');
             }
+
             $subPath = strstr($picture->path, '/uploads');
-            $completePath = base_path('/public' . $subPath);
+            $completePath = base_path('statics' . $subPath);
             if ($this->container->make('files')->exists($completePath)) {
                 $this->container->make('files')->delete($completePath);
             }
             $picture->delete();
         }
-        return $this->withCode(200)->withMessage('删除图片信息成功');
+        return $this->withCode(200)->withMessage('删除图片成功');
     }
 }

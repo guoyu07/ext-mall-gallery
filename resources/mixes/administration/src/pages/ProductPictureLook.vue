@@ -62,6 +62,7 @@
             };
         },
         methods: {
+            changePage() {},
             checkAllGroupChange() {
                 const self = this;
                 self.indeterminate = false;
@@ -98,8 +99,9 @@
                 }
             },
             lookPicture(item) {
-                this.modalPicture.img = item.img;
-                this.pictureModal = true;
+                const self = this;
+                self.modalPicture.img = item.img;
+                self.pictureModal = true;
             },
             removeImage(index) {
                 this.pictureList.splice(index, 1);

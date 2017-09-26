@@ -157,6 +157,7 @@
             };
         },
         methods: {
+            changePage() {},
             refreshData() {},
             remove(index) {
                 this.list.splice(index, 1);

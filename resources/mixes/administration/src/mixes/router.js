@@ -1,6 +1,6 @@
-import ProductPicture from '../pages/ProductPicture';
-import ProductPictureLook from '../pages/ProductPictureLook';
-import ProductPictureLookAll from '../pages/ProductPictureLookAll';
+import ProductPicture from '../pages/ProductPicture.vue';
+import ProductPictureLook from '../pages/ProductPictureLook.vue';
+import ProductPictureLookAll from '../pages/ProductPictureLookAll.vue';
 
 export default function (injection) {
     injection.useExtensionRoute([

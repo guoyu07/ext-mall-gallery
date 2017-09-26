@@ -63,19 +63,20 @@
         },
         methods: {
             checkAllGroupChange() {
-                this.indeterminate = false;
-                this.checkAll = true;
+                const self = this;
+                self.indeterminate = false;
+                self.checkAll = true;
                 const select = [];
-                this.pictureList.forEach(item => {
+                self.pictureList.forEach(item => {
                     if (item.single === false) {
-                        this.checkAll = false;
-                        this.indeterminate = true;
+                        self.checkAll = false;
+                        self.indeterminate = true;
                     } else {
                         select.push(item);
                     }
                 });
                 if (select.length === 0) {
-                    this.indeterminate = false;
+                    self.indeterminate = false;
                 }
             },
             delete() {},
@@ -84,15 +85,16 @@
                 self.$router.go(-1);
             },
             handleCheckAll() {
-                if (this.checkAll) {
-                    this.pictureList.forEach(item => {
+                const self = this;
+                if (self.checkAll) {
+                    self.pictureList.forEach(item => {
                         item.single = true;
                     });
                 } else {
-                    this.pictureList.forEach(item => {
+                    self.pictureList.forEach(item => {
                         item.single = false;
                     });
-                    this.indeterminate = false;
+                    self.indeterminate = false;
                 }
             },
             lookPicture(item) {

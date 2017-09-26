@@ -149,6 +149,11 @@
                         shopName: 'Rey吕官方旗舰店',
                     },
                 ],
+                page: {
+                    current_page: 1,
+                    per_page: 0,
+                    total: 0,
+                },
             };
         },
         methods: {
@@ -188,6 +193,14 @@
                                  :columns="columns"
                                  :context="self"
                                  :data="list"></i-table>
+                        <div class="page">
+                            <page :current="page.current_page"
+                                  @on-change="changePage"
+                                  :page-size="page.per_page"
+                                  :total="page.total"
+                                  v-if="page.total > page.per_page"
+                                  show-elevator></page>
+                        </div>
                     </card>
                 </tab-pane>
             </tabs>

@@ -16,6 +16,11 @@
                 modalPicture: {
                     img: '',
                 },
+                page: {
+                    current_page: 1,
+                    per_page: 0,
+                    total: 0,
+                },
                 pictureList: [
                     {
                         img: image,
@@ -129,7 +134,12 @@
                     <p class="tip">{{ item.size}}</p>
                 </div>
                 <div class="page">
-                    <page :total="100" show-elevator></page>
+                    <page :current="page.current_page"
+                          @on-change="changePage"
+                          :page-size="page.per_page"
+                          :total="page.total"
+                          v-if="page.total > page.per_page"
+                          show-elevator></page>
                 </div>
             </card>
             <modal

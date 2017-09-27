@@ -4,7 +4,6 @@ var webpack = require('webpack');
 var config = require('../config');
 var merge = require('webpack-merge');
 var baseWebpackConfig = require('./webpack.base.conf');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -19,7 +18,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     },
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/extension.min.js'),
+        filename: utils.assetsPath('js/addon.min.js'),
         library: 'notadd/mall-gallery',
         libraryTarget: "umd"
     },
@@ -33,7 +32,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             }
         }),
         new ExtractTextPlugin({
-            filename: utils.assetsPath('css/extension.min.css')
+            filename: utils.assetsPath('css/addon.min.css')
         }),
         new OptimizeCSSPlugin()
     ]

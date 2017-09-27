@@ -1,7 +1,7 @@
 {
     "name": "notadd/ext-mall-gallery",
     "description": "Notadd Extension for mall-gallery.",
-    "type": "notadd-extension",
+    "type": "notadd-addon",
     "keywords": [
         "Gallery",
         "mall-gallery",

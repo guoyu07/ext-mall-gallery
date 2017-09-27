@@ -7,10 +7,11 @@ author:
 version: 0.1.0
 provider: Notadd\MallGallery\Extension
 assets:
-    scripts:
-        - assets/extensions/notadd/mall-gallery/js/extension.min.js
-    stylesheets:
-        - assets/extensions/notadd/mall-gallery/css/extension.min.css
+    administration:
+        notadd/mall-gallery:
+            permissions:
+            scripts: assets/extensions/notadd/mall-gallery/js/addon.min.js
+            stylesheets: assets/extensions/notadd/mall-gallery/css/addon.min.css
 csrf:
     - 'api/mall_gallery*'
 events:
@@ -19,4 +20,4 @@ events:
 migrations:
     - databases/migrations
 publishes:
-    assets/extensions/notadd/navigation: resources/mixes/administration/dist/assets/extensions/notadd/mall-gallery
+    assets/extensions/notadd/mall-gallery: resources/mixes/administration/dist/assets/extensions/notadd/mall-gallery

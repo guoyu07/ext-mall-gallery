@@ -2,7 +2,14 @@
     "name": "notadd/ext-mall-gallery",
     "description": "Notadd Extension for mall-gallery.",
     "type": "notadd-extension",
-    "keywords": ["Gallery", "mall-gallery", "extension", "notadd-extension", "notadd", "Notadd"],
+    "keywords": [
+        "Gallery",
+        "mall-gallery",
+        "extension",
+        "notadd-extension",
+        "notadd",
+        "Notadd"
+    ],
     "homepage": "https://notadd.com",
     "license": "Apache-2.0",
     "authors": [
@@ -20,6 +27,10 @@
         "psr-4": {
             "Notadd\\MallGallery\\Tests\\": "tests/"
         }
+    },
+    "replace": {
+        "guzzlehttp/psr7": "1.4.*",
+        "psr/http-message": "1.0.*"
     },
     "require": {
         "php": ">=7.0",

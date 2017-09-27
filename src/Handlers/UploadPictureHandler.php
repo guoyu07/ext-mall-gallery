@@ -53,7 +53,7 @@ class UploadPictureHandler extends Handler
         ]);
 
         $galleryId = $this->request->get('gallery_id');
-        $gallery = Gallery::find($galleryId);
+        $gallery = Gallery::query()->find($galleryId);
         if ($gallery) {
             $galleryPath = $gallery->id;
             $mallId = $gallery->mall_id;
@@ -61,7 +61,7 @@ class UploadPictureHandler extends Handler
             return $this->withCode(401)->withError('相册id不存在');
         }
 
-        $mall = Mall::find($mallId);
+        $mall = Mall::query()->find($mallId);
         $mallPath = $mall->id;
 
         $img = $this->request->file('file');

@@ -3,12 +3,12 @@ require('./check-versions')();
 
 process.env.NODE_ENV = 'production';
 
+var chalk = require('chalk');
+var config = require('../config');
 var ora = require('ora');
 var path = require('path');
-var chalk = require('chalk');
 var shell = require('shelljs');
 var webpack = require('webpack');
-var config = require('../config');
 var webpackConfig = require('./webpack.prod.conf');
 
 var spinner = ora('building for production...');

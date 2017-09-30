@@ -19,5 +19,9 @@ events:
         - Notadd\MallGallery\Listeners\RouteRegister
 migrations:
     - databases/migrations
+navigations:
+    -
+        path: /mall-gallery
+        text: 商城图片空间
 publishes:
     assets/extensions/notadd/mall-gallery: resources/mixes/administration/dist/assets/extensions/notadd/mall-gallery

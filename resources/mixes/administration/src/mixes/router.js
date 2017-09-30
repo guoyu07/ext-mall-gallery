@@ -3,7 +3,8 @@ import PictureLook from '../pages/PictureLook.vue';
 import PictureLookAll from '../pages/PictureLookAll.vue';
 
 export default function (injection) {
-    injection.useExtensionRoute([
+    injection.routers = [
+        ...injection.routers,
         {
             beforeEnter: injection.middleware.requireAuth,
             component: PictureManager,
@@ -19,5 +20,5 @@ export default function (injection) {
             component: PictureLookAll,
             path: 'picture/look/all',
         },
-    ]);
+    ];
 }

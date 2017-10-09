@@ -52,7 +52,7 @@ class DeleteGalleryHandler extends Handler
             }
 
             //再删除空文件夹
-            $imgDictionary = base_path('statics/uploads/' . $galleryId);
+            $imgDictionary = base_path('statics/uploads/' . $gallery->mall_id . '/' . $galleryId);
             if ($this->container->make('files')->exists($imgDictionary)) {
                 rmdir($imgDictionary);
             }

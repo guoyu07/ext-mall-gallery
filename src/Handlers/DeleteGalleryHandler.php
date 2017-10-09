@@ -40,14 +40,11 @@ class DeleteGalleryHandler extends Handler
         }
 
         //删除相册文件夹
-        $picture = $gallery->pictures()->first();
-        if ($picture) {
-            $subPath = strstr($picture->path, '/uploads');
-            $completePath = base_path('statics' . $subPath);
-            $imgDictionary = Str::substr($completePath, 0, strrpos($completePath, '/'));
+        $pictures = $gallery->pictures;
+        if ($pictures->count() > 0) {
 
             //先删除文件夹下面的图片
-            foreach ($gallery->pictures as $pic) {
+            foreach ($pictures as $pic) {
                 $path = base_path('statics' . strstr($pic->path, '/uploads'));
                 if ($this->container->make('files')->exists($path)) {
                     $this->container->make('files')->delete($path);
@@ -55,6 +52,7 @@ class DeleteGalleryHandler extends Handler
             }
 
             //再删除空文件夹
+            $imgDictionary = base_path('statics/uploads/' . $galleryId);
             if ($this->container->make('files')->exists($imgDictionary)) {
                 rmdir($imgDictionary);
             }

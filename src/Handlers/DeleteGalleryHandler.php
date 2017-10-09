@@ -8,7 +8,6 @@
  */
 namespace Notadd\MallGallery\Handlers;
 
-use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
 

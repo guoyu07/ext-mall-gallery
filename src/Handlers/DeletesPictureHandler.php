@@ -34,7 +34,7 @@ class DeletesPictureHandler extends Handler
     /**
      * Execute Handler.
      *
-     * @return DeletePictureHandler
+     * @return DeletesPictureHandler
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Validation\ValidationException
      */

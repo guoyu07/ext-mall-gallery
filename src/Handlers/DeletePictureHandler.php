@@ -21,6 +21,11 @@ class DeletePictureHandler extends Handler
 
     protected $file;
 
+    /**
+     * DeletePictureHandler constructor.
+     * @param Container $container
+     * @param Filesystem $filesystem
+     */
     public function __construct(Container $container, Filesystem $filesystem)
     {
         parent::__construct($container);

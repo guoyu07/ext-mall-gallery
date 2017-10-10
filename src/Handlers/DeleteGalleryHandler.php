@@ -8,6 +8,8 @@
  */
 namespace Notadd\MallGallery\Handlers;
 
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Gallery;
 
@@ -16,6 +18,17 @@ use Notadd\MallGallery\Models\Gallery;
  */
 class DeleteGalleryHandler extends Handler
 {
+    protected $file;
+
+    /**
+     * DeleteGalleryHandler constructor.
+     * @param Container $container
+     */
+    public function __construct(Container $container, Filesystem $filesystem)
+    {
+        parent::__construct($container);
+        $this->file = $filesystem;
+    }
 
     /**
      * Execute Handler.
@@ -37,26 +50,15 @@ class DeleteGalleryHandler extends Handler
         if (!$gallery instanceof Gallery) {
             return $this->withCode(401)->withError('请重新确认相册Id是否正确');
         }
-
+        
         //删除相册文件夹
-        $pictures = $gallery->pictures;
-        if ($pictures->count() > 0) {
-
-            //先删除文件夹下面的图片
-            foreach ($pictures as $pic) {
-                $path = base_path('statics' . strstr($pic->path, '/uploads'));
-                if ($this->container->make('files')->exists($path)) {
-                    $this->container->make('files')->delete($path);
-                }
-            }
-
-            //再删除空文件夹
-            $imgDictionary = base_path('statics/uploads/gallery/' . $gallery->mall_id . '/' . $galleryId);
-            if ($this->container->make('files')->exists($imgDictionary)) {
-                rmdir($imgDictionary);
+        $subPath = 'statics/uploads/gallery/';
+        if ($this->file->exists(base_path($subPath . $gallery->mall_id))) {
+            if ($this->file->exists(base_path($subPath . $gallery->mall_id . '/' . $galleryId))) {
+                $galleryPath = base_path($subPath . $gallery->mall_id . '/' . $galleryId);
+                $this->file->deleteDirectory($galleryPath);
             }
         }
-
 
         if ($gallery->delete()) {
             return $this->withCode(200)->withMessage('删除相册成功');

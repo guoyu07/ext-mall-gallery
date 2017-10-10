@@ -8,6 +8,8 @@
  */
 namespace Notadd\MallGallery\Handlers;
 
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Picture;
 
@@ -16,6 +18,15 @@ use Notadd\MallGallery\Models\Picture;
  */
 class DeletePictureHandler extends Handler
 {
+
+    protected $file;
+
+    public function __construct(Container $container, Filesystem $filesystem)
+    {
+        parent::__construct($container);
+        $this->file = $filesystem;
+    }
+
     /**
      * Execute Handler.
      *
@@ -40,8 +51,8 @@ class DeletePictureHandler extends Handler
 
         $subPath = strstr($picture->path, '/uploads');
         $completePath = base_path('statics' . $subPath);
-        if ($this->container->make('files')->exists($completePath)) {
-            $this->container->make('files')->delete($completePath);
+        if ($this->file->exists($completePath)) {
+            $this->file->delete($completePath);
         }
 
         if ($picture->delete()) {

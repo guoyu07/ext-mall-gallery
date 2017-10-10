@@ -10,11 +10,34 @@
 namespace Notadd\MallGallery\Handlers;
 
 
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\MallGallery\Models\Picture;
 
 class DeletesPictureHandler extends Handler
 {
+
+    protected $file;
+
+    /**
+     * DeletesPictureHandler constructor.
+     * @param Container $container
+     * @param Filesystem $filesystem
+     */
+    public function __construct(Container $container, Filesystem $filesystem)
+    {
+        parent::__construct($container);
+        $this->file = $filesystem;
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return DeletePictureHandler
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function execute()
     {
         $this->validate($this->request, [
@@ -32,8 +55,8 @@ class DeletesPictureHandler extends Handler
 
             $subPath = strstr($picture->path, '/uploads');
             $completePath = base_path('statics' . $subPath);
-            if ($this->container->make('files')->exists($completePath)) {
-                $this->container->make('files')->delete($completePath);
+            if ($this->file->exists($completePath)) {
+                $this->file->delete($completePath);
             }
             $picture->delete();
         }

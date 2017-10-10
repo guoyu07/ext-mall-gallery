@@ -26,7 +26,7 @@ class WatermarkPictureHandler extends Handler
 
         $ids = explode(',', $this->request->get('picture_id'));
         $position = $this->request->get('position', 'bottom-right');    //  添加水印位置
-        $waterMark = Image::make('/var/www/notadd/extensions/notadd/ext-mall-gallery/resources/images/mark.jpg');    //  水印图片
+        $waterMark = Image::make(base_path('extensions/notadd/ext-mall-gallery/resources/images/mark.jpg'));    //  水印图片
         foreach ($ids as $id) {
             $picture = Picture::find($id);
             if (!$picture instanceof Picture) {

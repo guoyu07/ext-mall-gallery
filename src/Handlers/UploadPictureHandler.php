@@ -65,7 +65,7 @@ class UploadPictureHandler extends Handler
         $hash = hash_file('md5', $img->getPathname(), false);   //  加密文件
 
         $dictionary = base_path('statics/uploads/' . $mallPath . DIRECTORY_SEPARATOR . $galleryPath);     //  文件路径
-        $random = random_int(0, 9999999);
+        $random = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_BOTH);
         $file = Str::substr($hash, 0, 32) . $random . '.' . $img->getClientOriginalExtension();     //  上传之后文件名
         if (!$this->files->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
             $img->move($dictionary, $file);

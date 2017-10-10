@@ -52,17 +52,13 @@ class UploadPictureHandler extends Handler
             'file.required' => '请选择图片',
         ]);
 
-        $galleryId = $this->request->get('gallery_id');
-        $gallery = Gallery::query()->find($galleryId);
-        if ($gallery) {
+        $gallery = Gallery::query()->find($this->request->input('gallery_id'));
+        if ($gallery instanceof Gallery) {
             $galleryPath = $gallery->id;
-            $mallId = $gallery->mall_id;
+            $mallPath = $gallery->mall_id;
         } else {
             return $this->withCode(401)->withError('相册id不存在');
         }
-
-        $mall = Mall::query()->find($mallId);
-        $mallPath = $mall->id;
 
         $img = $this->request->file('file');
         $realName = $img->getClientOriginalName();  //  文件原名

@@ -37,7 +37,7 @@ class GalleryTest extends TestCase
      */
     public function deleteGallery()
     {
-        $this->json('post', 'api/mall_gallery/gallery/delete')
+        $this->json('post', 'api/mall_gallery/gallery/delete', ['gallery_id' => 1])
             ->assertStatus(200);
     }
 

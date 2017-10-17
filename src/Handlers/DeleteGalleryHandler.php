@@ -50,7 +50,7 @@ class DeleteGalleryHandler extends Handler
         if (!$gallery instanceof Gallery) {
             return $this->withCode(401)->withError('请重新确认相册Id是否正确');
         }
-        
+
         //删除相册文件夹
         $subPath = 'statics/uploads/gallery/';
         if ($this->file->exists(base_path($subPath . $gallery->mall_id))) {

@@ -63,7 +63,7 @@ class PictureTest extends TestCase
      */
     public function markPicture()
     {
-        $this->json('post', 'api/mall_gallery/picture/mark')
+        $this->json('post', 'api/mall_gallery/picture/mark', ['picture_id' => [1, 2, 3]])
             ->assertStatus(200);
     }
 

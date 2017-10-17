@@ -45,7 +45,7 @@ class PictureTest extends TestCase
      */
     public function deletePicture()
     {
-        $this->json('post', 'api/mall_gallery/picture/delete')
+        $this->json('post', 'api/mall_gallery/picture/delete', ['picture_id' => 1])
             ->assertStatus(200);
     }
 

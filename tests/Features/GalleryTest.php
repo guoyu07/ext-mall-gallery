@@ -28,7 +28,7 @@ class GalleryTest extends TestCase
      */
     public function createGallery()
     {
-        $this->json('post', 'api/mall_gallery/gallery/set')
+        $this->json('post', 'api/mall_gallery/gallery/set', ['mall_id' => 1, 'gallery_name' => 'gallery1'])
             ->assertStatus(200);
     }
 

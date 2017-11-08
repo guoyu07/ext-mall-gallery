@@ -68,7 +68,7 @@ class AllGalleryHandler extends Handler
                     $where = ['mall_id' => $value];
                     break;
                 case 3:     //店铺名称
-                    $mall = Mall::where('name', $value)->first();
+                    $mall = Mall::query()->where('name', $value)->first();
                     $where = ['mall_id' => $mall->id];
                     break;
             }
@@ -76,7 +76,7 @@ class AllGalleryHandler extends Handler
             $where = [];
         }
 
-        $galleries = Gallery::with('mall')->withCount('pictures')->where($where)->OrderBy($orderBy, $destination)->paginate($perPage);
+        $galleries = Gallery::query()->with('mall')->withCount('pictures')->where($where)->OrderBy($orderBy, $destination)->paginate($perPage);
 
         return $this->withCode(200)->withData($galleries)->withMessage('获取数据成功！');
     }

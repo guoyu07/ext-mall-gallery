@@ -33,7 +33,7 @@ class WatermarkPictureHandler extends Handler
                 return $this->withCode(401)->withError('未找到id为' . $id . '的图片');
             }
             $subPath = strstr($picture->path, '/uploads');
-            $completePath = base_path('statics' . $subPath);
+            $completePath = base_path('public' . $subPath);
             $result = Image::make($completePath)->insert($waterMark, $position)->save($completePath);
             if (!$result) {
                 return $this->withCode(402)->withError('添加水印失败');

@@ -52,7 +52,7 @@ class DeleteGalleryHandler extends Handler
         }
 
         //删除相册文件夹
-        $subPath = 'statics/uploads/gallery/';
+        $subPath = 'public/uploads/gallery/';
         if ($this->file->exists(base_path($subPath . $gallery->mall_id))) {
             if ($this->file->exists(base_path($subPath . $gallery->mall_id . '/' . $galleryId))) {
                 $galleryPath = base_path($subPath . $gallery->mall_id . '/' . $galleryId);
